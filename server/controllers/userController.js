@@ -34,27 +34,28 @@ const getUserDataFirst = async (req, res) => {
   }
 };
 
-  const signUpUser = async (req, res) => {
-    try {
-      let userCredentials = req.body;
+const signUpUser = async (req, res) => {
+  try {
+    let userCredentials = req.body;
 
-      const profileImgURL = req?.file?.filename;
+    const profileImgURL = req?.file?.filename;
 
-      if (profileImgURL) {
-        userCredentials = { ...userCredentials, profileImgURL: profileImgURL };
-      }
-
-      const user = await User.signup(userCredentials, "user", true);
-
-      const token = createToken(user._id);
-
-      res.cookie("user_token", token, cookieConfig);
-
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+    if (profileImgURL) {
+      userCredentials = { ...userCredentials, profileImgURL: profileImgURL };
     }
-  };
+
+    const user = await User.signup(userCredentials, "user", true);
+
+    const token = createToken(user._id);
+
+    res.cookie("user_token", token, cookieConfig);
+
+    // Return success with 201 status code
+    res.status(201).json({ status: "success", message: "User registered successfully", user });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;

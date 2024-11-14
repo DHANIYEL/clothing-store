@@ -6,6 +6,10 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
+    username: {
+      type: String,
+      unique: true,
+    },    
     firstName: {
       type: String,
       required: true,
