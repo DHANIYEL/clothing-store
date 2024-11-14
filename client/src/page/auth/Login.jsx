@@ -49,9 +49,9 @@ const Login = () => {
     dispatch(loginUser(value));
   };
 
-  const loginWithGoogle = async (data) => {
-    dispatch(googleLoginOrSignUp(data));
-  };
+  // const loginWithGoogle = async (data) => {
+  //   dispatch(googleLoginOrSignUp(data));
+  // };
 
   return (
     <div className="py-20 bg-gray-100 lg:flex lg:items-center text-gray-500">
@@ -100,7 +100,7 @@ const Login = () => {
               Forgot Password?
             </div>
           </Link>
-          <p className="my-4">OR</p>
+          {/* <p className="my-4">OR</p>
           <div className="flex justify-center">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
@@ -110,7 +110,7 @@ const Login = () => {
                 console.log("Login Failed");
               }}
             />
-          </div>
+          </div> */}
 
           <p className="my-5">
             Don't have an account?{" "}

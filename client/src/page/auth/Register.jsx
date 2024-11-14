@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SignUpBG from "../../assets/SignUpBG.png";
 import Logo from "../../assets/logoGrey.png";
 import {
@@ -22,7 +22,6 @@ import OTPEnterSection from "./Register/OTPEnterSection";
 import OTPExpired from "./components/OTPExpired";
 import toast from "react-hot-toast";
 import { appJson } from "../../Common/configurations";
-import { GoogleLogin } from "@react-oauth/google";
 import { commonRequest } from "../../Common/api";
 import { updateError } from "../../redux/reducers/userSlice";
 
@@ -127,9 +126,9 @@ const Register = () => {
   };
 
   // Google Login
-  const loginWithGoogle = async (data) => {
-    dispatch(googleLoginOrSignUp(data));
-  };
+  // const loginWithGoogle = async (data) => {
+  //   dispatch(googleLoginOrSignUp(data));
+  // };
 
   return (
     <div className="py-20 bg-gray-100 lg:flex text-gray-500">
@@ -151,7 +150,8 @@ const Register = () => {
           >
             {({ setFieldValue }) => (
               <Form className="w-full">
-                <div className="flex justify-center">
+                {/* Image input commented */}
+                {/* <div className="flex justify-center">
                   <CustomSingleFileInput
                     onChange={(file) => setFieldValue("profileImgURL", file)}
                   />
@@ -160,7 +160,7 @@ const Register = () => {
                     name="profileImgURL"
                     component="span"
                   />
-                </div>
+                </div> */}
                 <InputWithIcon
                   icon={<AiOutlineUser />}
                   title="Username"
@@ -226,7 +226,8 @@ const Register = () => {
         {otpExpired && <OTPExpired />}
         <div className="text-center">
           <p className="my-4">OR</p>
-          <div className="flex justify-center">
+          {/* Google login commented */}
+          {/* <div className="flex justify-center">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);
@@ -237,7 +238,7 @@ const Register = () => {
                 toast.error("Something is wrong! Please try later");
               }}
             />
-          </div>
+          </div> */}
           <p className="my-5">
             Already have an account?{" "}
             <Link
