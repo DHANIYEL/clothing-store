@@ -10,7 +10,7 @@ import Loader from '../components/Loader'
 import axios from 'axios';
 
 
-export default function RegisterForm({ onSubmit }) {
+export default function RegisterForm({  }) {
 	const [fullname, setFullname] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -34,12 +34,13 @@ export default function RegisterForm({ onSubmit }) {
 		setLoading(true);
 		
 		try {
-			const resp = await axios.post('https://your-backend-url.com/endpoint', {
+			const resp = await axios.post('/auth/register', {
 				fullname,
 				email,
 				password
-			});
-	
+			  });
+			  
+			  
 			console.log("Response from server:", resp.data); // Log server response for debugging
 			setLoading(false);
 	
