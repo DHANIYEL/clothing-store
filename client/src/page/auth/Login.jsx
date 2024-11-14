@@ -37,7 +37,7 @@ const Login = () => {
       if (!user.isEmailVerified) {
         navigate("/otp");
       } else {
-        navigate("/");
+        navigate("/dashboard");
       }
     }
     return () => {
