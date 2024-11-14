@@ -21,6 +21,7 @@ const CreateAdmin = () => {
   const navigate = useNavigate();
 
   const initialValues = {
+    username: "", // Added username field
     firstName: "",
     lastName: "",
     email: "",
@@ -30,6 +31,7 @@ const CreateAdmin = () => {
   };
 
   const validationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"), // Added username validation
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
     email: Yup.string().email().required("Email is required"),
@@ -52,6 +54,7 @@ const CreateAdmin = () => {
   const handleCreateAdmin = async (value) => {
     const formData = new FormData();
 
+    formData.append("username", value.username); // Added username
     formData.append("firstName", value.firstName);
     formData.append("lastName", value.lastName);
     formData.append("email", value.email);
@@ -81,13 +84,6 @@ const CreateAdmin = () => {
             <AiOutlineClose />
             Cancel
           </button>
-          {/* <button
-            className="admin-button-fl bg-blue-700 text-white"
-            onClick={() => navigate("create")}
-          >
-            <AiOutlinePlus />
-            Create New Admin
-          </button> */}
         </div>
       </div>
       <div className="w-2/5 mx-auto">
@@ -98,6 +94,12 @@ const CreateAdmin = () => {
           validationSchema={validationSchema}
         >
           <Form className="w-full">
+            <InputWithIcon
+              icon={<AiOutlineUser />}
+              title="Username"
+              name="username"
+              placeholder="Enter your username"
+            />
             <InputWithIcon
               icon={<AiOutlineUser />}
               title="First Name"

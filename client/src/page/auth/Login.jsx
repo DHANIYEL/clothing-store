@@ -37,13 +37,25 @@ const Login = () => {
       if (!user.isEmailVerified) {
         navigate("/otp");
       } else {
-        navigate("/dashboard");
+        // Check user role and navigate accordingly
+        switch (user.role) {
+          case "admin":
+          case "superAdmin":
+            navigate("/admin");
+            break;
+          case "user":
+          default:
+            navigate("/dashboard");
+            break;
+        }
       }
     }
+  
     return () => {
       dispatch(updateError(""));
     };
-  }, [user]);
+  }, [user, navigate, dispatch]);
+  
 
   const handleLoginSubmit = (value) => {
     dispatch(loginUser(value));
