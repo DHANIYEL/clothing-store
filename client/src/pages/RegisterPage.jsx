@@ -41,7 +41,7 @@ export default function RegisterPage() {
 		>
 			<div className="min-w-sm p-6 rounded-lg bg-white filter drop-shadow-2xl">
 				<h3 className="text-2xl font-bold text-center mb-6">Create a new account</h3>
-				<RegisterForm />
+				<RegisterForm onSubmit={handleRegister}/>
 			</div>
 		</main>
 	)

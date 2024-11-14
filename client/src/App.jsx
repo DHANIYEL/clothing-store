@@ -33,7 +33,7 @@ export default function App() {
       if (resp.status == "ok") {
         setUser(resp.user)
       }
-    })()
+    })
   }, [])
 
   useEffect(() => {

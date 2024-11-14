@@ -3,12 +3,14 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import userRouter from './routes/user.js';
-import register from './routes/auth.js';
+import authRouter from './routes/auth.js';
 import productRouter from './routes/product.js';
 import cartRouter from './routes/cart.js';
 import orderRouter from './routes/order.js';
 import checkoutRouter from './routes/checkout.js';
 import { handleMalformedJson, formatCelebrateErrors } from './middlewares/handleError.js';
+import { auth as authSchema } from './models/schema.js';
+
 
 dotenv.config();
 
@@ -32,7 +34,7 @@ app.use(express.json());
 app.use(handleMalformedJson); // handle common request errors
 
 // Routes
-app.use("/auth", register);
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/carts", cartRouter);
@@ -43,6 +45,11 @@ app.use("/checkout", checkoutRouter);
 app.get("/", (req, res) => {
   res.json({ status: "ok" });
 });
+app.post(
+  '/auth/register',
+  celebrate({ body: authSchema.register }), // Validate registration data
+  registerUser // Controller to handle registration logic
+);
 
 // Format Celebrate validation errors
 app.use(formatCelebrateErrors);

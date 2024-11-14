@@ -10,7 +10,7 @@ import Loader from '../components/Loader'
 import axios from 'axios';
 
 
-export default function RegisterForm({  }) {
+export default function RegisterForm({ onSubmit }) {
 	const [fullname, setFullname] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -19,41 +19,42 @@ export default function RegisterForm({  }) {
 	const [loading, setLoading] = useState(false)
 
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-		if (password.length < 6) {
-			setError("Password must be at least 6 characters");
-			return;
-		}
-		if (password !== confirmPassword) {
-			setError("Passwords don't match");
-			return;
-		}
-		
-		console.log("Form data:", { fullname, email, password, confirmPassword });
-		setLoading(true);
-		
-		try {
-			const resp = await axios.post('/auth/register', {
-				fullname,
-				email,
-				password
-			  });
-			  
-			  
-			console.log("Response from server:", resp.data); // Log server response for debugging
-			setLoading(false);
+
+	const handleSubmit = async (e) => {
+	  e.preventDefault();
+	  
+	  if (password.length < 6) {
+		setError("Password must be at least 6 characters");
+		return;
+	  }
+	  if (password !== confirmPassword) {
+		setError("Passwords don't match");
+		return;
+	  }
 	
-			if (resp.data.status === "error") {
-				setError(resp.data.message);
-			} else {
-				// Handle success case (e.g., redirect or show a success message)
-			}
-		} catch (err) {
-			console.error("Error during submission:", err);
-			setError("Unexpected error occurred");
-			setLoading(false);
+	  setLoading(true);
+	
+	  try {
+		const resp = await axios.post(
+		  'http://localhost:5000/auth/register',
+		  { fullname, email, password },
+		  { headers: { 'Content-Type': 'application/json' } }
+		);
+		
+		console.log("Response from server:", resp.data);
+		setLoading(false);
+	
+		if (resp.data.status === "error") {
+		  setError(resp.data.message);
+		} else {
+		  setError(''); // Clear error if successful
+		  // Redirect or show success message here
 		}
+	  } catch (err) {
+		console.error("Error during submission:", err);
+		setError("Unexpected error occurred");
+		setLoading(false);
+	  }
 	};
 	
 	
