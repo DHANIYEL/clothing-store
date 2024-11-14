@@ -1,12 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import 'virtual:windi.css'
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import "react-day-picker/dist/style.css";
+import "react-image-crop/dist/ReactCrop.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-ReactDOM.render(
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import { GOOGLE_ID } from "./Common/configurations.jsx";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+    <Provider store={store}>
+      <GoogleOAuthProvider clientId={`${GOOGLE_ID}`}>
+        <App />
+      </GoogleOAuthProvider>
+    </Provider>
+  </React.StrictMode>
+);
