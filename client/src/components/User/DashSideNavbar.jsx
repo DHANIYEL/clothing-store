@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actions/userActions";
 import { RiDashboardLine } from "react-icons/ri";
@@ -8,18 +8,32 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { TiTicket } from "react-icons/ti";
-import { MdTrackChanges } from "react-icons/md";
 import { BiUser, BiHistory } from "react-icons/bi";
 import { GiMailbox } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "react-icons/fi";
+import ConfirmationModal from '../LogoutConfirmationModal'; // Import the new modal component
 
 const DashSideNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogout = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  // Function to handle logout button click
+  const handleLogoutClick = () => {
+    setModalOpen(true); // Show the confirmation modal
+  };
+
+  // Function to confirm logout and proceed
+  const confirmLogout = () => {
     dispatch(logout());
-    navigate("/");
+    navigate("/"); // Redirect after logout
+    setModalOpen(false); // Close the modal
+  };
+
+  // Function to cancel the logout
+  const cancelLogout = () => {
+    setModalOpen(false); // Close the modal without logging out
   };
 
   return (
@@ -36,10 +50,6 @@ const DashSideNavbar = () => {
         <BiHistory />
         Order History
       </NavLink>
-      {/* <NavLink className="side-nav-link-sp" to="track-order">
-        <MdTrackChanges />
-        Track Order
-      </NavLink> */}
       <NavLink className="side-nav-link-sp" to="wishlist">
         <AiOutlineHeart />
         Wishlist
@@ -60,10 +70,18 @@ const DashSideNavbar = () => {
         <FiSettings />
         Settings
       </NavLink>
-      <button className="side-nav-link-sp w-full" onClick={handleLogout}>
+      <button className="side-nav-link-sp w-full" onClick={handleLogoutClick}>
         <AiOutlineLogout />
         Logout
       </button>
+
+      {/* Confirmation modal */}
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onConfirm={confirmLogout}
+        onCancel={cancelLogout}
+        message="Are you sure you want to log out?"
+      />
     </div>
   );
 };
