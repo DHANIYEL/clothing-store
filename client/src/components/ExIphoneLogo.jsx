@@ -1,12 +1,15 @@
 import React from "react";
-import Logo from "../assets/logoGrey.png";
+import SageLogo from "../assets/sage-logo.png";
 
 const ExIphoneLogo = () => {
   return (
-    <>
-      <img src={Logo} alt="ex.iphones. logo" />
-      <p>ex.iphones.</p>
-    </>
+    <div className="flex justify-center items-center">
+      <img 
+        src={SageLogo} 
+        alt="ex.iphones. logo" 
+        className="w-48 h-auto"  // Adjust width (w-48) as needed
+      />
+    </div>
   );
 };
 
