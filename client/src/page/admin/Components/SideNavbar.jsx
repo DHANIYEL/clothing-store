@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ExIphoneLogo from "../../../components/ExIphoneLogo";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -11,16 +11,31 @@ import { AiOutlineTags } from "react-icons/ai";
 import { FaUsersCog, FaUsers } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/actions/userActions";
+import ConfirmationModal from "../../../components/LogoutConfirmationModal";
 
 const SideNavbar = () => {
   const { user } = useSelector((state) => state.user);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+
+  // Function to handle logout click
+  const handleLogoutClick = () => {
+    setModalOpen(true); // Show the confirmation modal
+  };
+
+  // Function to confirm logout and proceed
+  const confirmLogout = () => {
     dispatch(logout());
-    navigate("/");
+    navigate("/"); // Redirect after logout
+    setModalOpen(false); // Close the modal
+  };
+
+  // Function to cancel logout
+  const cancelLogout = () => {
+    setModalOpen(false); // Close the modal without logging out
   };
 
   return (
@@ -80,12 +95,19 @@ const SideNavbar = () => {
         </NavLink>
         <button
           className="side-nav-link-sp cursor-pointer w-full"
-          onClick={handleLogout}
+          onClick={handleLogoutClick}
         >
           <FiLogOut />
           Logout
         </button>
       </div>
+            {/* Confirmation modal */}
+        <ConfirmationModal
+        isOpen={isModalOpen}
+        onConfirm={confirmLogout}
+        onCancel={cancelLogout}
+        message="Are you sure you want to log out?"
+      />
     </>
   );
 };

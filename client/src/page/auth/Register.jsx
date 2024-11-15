@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SignUpBG from "../../assets/SignUpBG.png";
 import Logo from "../../assets/logoGrey.png";
 import {
@@ -22,18 +22,18 @@ import OTPEnterSection from "./Register/OTPEnterSection";
 import OTPExpired from "./components/OTPExpired";
 import toast from "react-hot-toast";
 import { appJson } from "../../Common/configurations";
-import { GoogleLogin } from "@react-oauth/google";
 import { commonRequest } from "../../Common/api";
 import { updateError } from "../../redux/reducers/userSlice";
 
 const Register = () => {
-  const { user, loading, error } = useSelector((state) => state.user);
+  const { user, error } = useSelector((state) => state.user);
   const [emailSec, setEmailSec] = useState(true);
   const [otpSec, setOTPSec] = useState(false);
   const [otpExpired, setOTPExpired] = useState(false);
   const [otpLoading, setOTPLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
@@ -45,6 +45,7 @@ const Register = () => {
   }, [user]);
 
   const initialValues = {
+    username: "", // Added username field
     firstName: "",
     lastName: "",
     email: "",
@@ -55,6 +56,7 @@ const Register = () => {
   };
 
   const validationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"), // Added username validation
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
     email: Yup.string().email().required("Email is required"),
@@ -72,12 +74,11 @@ const Register = () => {
       .moreThan(999999999, "Not valid phone number"),
   });
 
-  const dispatch = useDispatch();
-
   const [data, setData] = useState({});
 
   const dispatchSignUp = () => {
     let formData = new FormData();
+    formData.append("username", data.username); // Added username
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("email", data.email);
@@ -125,12 +126,12 @@ const Register = () => {
   };
 
   // Google Login
-  const loginWithGoogle = async (data) => {
-    dispatch(googleLoginOrSignUp(data));
-  };
+  // const loginWithGoogle = async (data) => {
+  //   dispatch(googleLoginOrSignUp(data));
+  // };
 
   return (
-    <div className="py-20 bg-gray-100 lg:flex  text-gray-500">
+    <div className="py-20 bg-gray-100 lg:flex text-gray-500">
       <div className="lg:w-1/2">
         <img src={SignUpBG} alt="SignUpBG" />
       </div>
@@ -138,7 +139,7 @@ const Register = () => {
       <div className="lg:w-1/2 p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
         <div className="flex items-center justify-center">
           <img src={Logo} alt="ex.iphones. logo" className="lg:w-1/12 w-1/12" />
-          <p className="text-3xl font-bold ">ex.iphones.</p>
+          <p className="text-3xl font-bold">ex.iphones.</p>
         </div>
         <h1 className="text-2xl my-5 font-bold">Sign Up</h1>
         {emailSec && (
@@ -147,9 +148,10 @@ const Register = () => {
             onSubmit={handleRegister}
             validationSchema={validationSchema}
           >
-            {({ values, setFieldValue }) => (
+            {({ setFieldValue }) => (
               <Form className="w-full">
-                <div className="flex justify-center">
+                {/* Image input commented */}
+                {/* <div className="flex justify-center">
                   <CustomSingleFileInput
                     onChange={(file) => setFieldValue("profileImgURL", file)}
                   />
@@ -158,7 +160,13 @@ const Register = () => {
                     name="profileImgURL"
                     component="span"
                   />
-                </div>
+                </div> */}
+                <InputWithIcon
+                  icon={<AiOutlineUser />}
+                  title="Username"
+                  name="username"
+                  placeholder="Enter your username"
+                />
                 <InputWithIcon
                   icon={<AiOutlineUser />}
                   title="First Name"
@@ -218,7 +226,8 @@ const Register = () => {
         {otpExpired && <OTPExpired />}
         <div className="text-center">
           <p className="my-4">OR</p>
-          <div className="flex justify-center">
+          {/* Google login commented */}
+          {/* <div className="flex justify-center">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);
@@ -229,7 +238,7 @@ const Register = () => {
                 toast.error("Something is wrong! Please try later");
               }}
             />
-          </div>
+          </div> */}
           <p className="my-5">
             Already have an account?{" "}
             <Link

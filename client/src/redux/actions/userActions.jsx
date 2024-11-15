@@ -7,6 +7,7 @@ import {
 } from "../../Common/configurations";
 import { URL } from "../../Common/api";
 
+
 export const logout = createAsyncThunk(
   "user/logout",
   async (userCredentials, { rejectWithValue }) => {
