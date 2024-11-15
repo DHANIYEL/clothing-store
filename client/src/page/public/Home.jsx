@@ -1,5 +1,4 @@
 import React from "react";
-import BgImage from "../../assets/iphone.png";
 import NewsLetter from "../../assets/newletter.png";
 
 import { BiSearch } from "react-icons/bi";
@@ -9,16 +8,9 @@ import NewIphone from "../../components/HomeComponents/NewIphone";
 import { useSelector } from "react-redux";
 import ImageSlider from "../../components/HomeComponents/ImageSlider";
 import JustLoading from "../../components/JustLoading";
-import { useNavigate } from "react-router-dom";
-import HomeImg from "../../assets/home-img.jpg"
 
 const Home = () => {
-  const navigate = useNavigate();
   const { loading } = useSelector((state) => state.user);
-
-  const gotoLogin = () => {
-    navigate("/login");
-  };
 
   if (loading) {
     return (
@@ -31,34 +23,9 @@ const Home = () => {
   return (
     <div className="">
       {/* Landing Session */}
-  {/* Home Image Section */}
-<div className="relative h-screen w-full">
-  {/* Background Image */}
-  <img
-    src={HomeImg}
-    className="h-full w-full object-cover"
-    alt="Home Background"
-  />
-
-  {/* Centered Text Overlay */}
-  <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-gray-200 bg-black bg-opacity-50 ">
-    <div className="max-w-4xl">
-    <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-      Discover Most Affordable Apple Products
-    </h1>
-    <p className="font-semibold text-gray-300 text-sm lg:text-lg mb-10 lg:mb-3">
-      Find the best, reliable and affordable apple products here. We focus
-      on the product quality. Here you can find all the products apple
-      ever made. Even the products apple officially stopped selling. So
-      why you are waiting? Just order now!
-    </p>
-    <button className="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 "
-     onClick={() => document.getElementById('new-collection').scrollIntoView({ behavior: 'smooth' })}
-    >Shop Now</button>
-    </div>
-
-  </div>
-</div>
+      {/* Home Image Section */}
+        {/* Carousel Section */}
+        <ImageSlider />
 
       {/* ---------- New Collections  ---------*/}
       <NewCollection />
@@ -81,8 +48,6 @@ const Home = () => {
       <NewIphone />
 
       {/* Image Slideshow */}
-
-      <ImageSlider />
 
       {/* Apple Watch Listing */}
       {/* <AppleWatchCollection /> */}

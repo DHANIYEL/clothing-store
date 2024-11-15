@@ -1,4 +1,4 @@
-import { useLocation, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import ExIphoneLogo from "./ExIphoneLogo";
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineHeart, AiOutlineUser, AiOutlineHistory, AiOutlineLogout } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -6,9 +6,6 @@ import { RiDashboardLine } from "react-icons/ri";
 import OutsideTouchCloseComponent from "./OutsideTouchCloseComponent";
 
 const NavBar = ({ user, toggleDropDown, dropDown, handleLogout, toggleSideNavbar }) => {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-
   return (
     <nav className={`flex z-10 absolute items-center justify-between py-5 px-5 lg:px-40 font-bold bg-white text-gray-500 w-full`}>
       <div className=" flex items-center cursor-pointer opacity-70 hover:opacity-100">
