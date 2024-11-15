@@ -52,6 +52,9 @@ const Home = () => {
       ever made. Even the products apple officially stopped selling. So
       why you are waiting? Just order now!
     </p>
+    <button className="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 "
+     onClick={() => document.getElementById('new-collection').scrollIntoView({ behavior: 'smooth' })}
+    >Shop Now</button>
     </div>
 
   </div>
@@ -61,7 +64,7 @@ const Home = () => {
       <NewCollection />
 
       {/* Four Iphones */}
-      <div className="bg-black text-white text-center">
+      <div className="bg-black text-white text-center" id="new-collection">
         <h1 className="text-5xl font-bold pt-32">ex.iphones.</h1>
         <p className="text-sm lg:text-xl mt-8 font-bold">
           From ₹25,000 to ₹100,000 Every Model Ever Built
