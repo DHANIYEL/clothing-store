@@ -1,5 +1,4 @@
 import React from "react";
-import BgImage from "../../assets/iphone.png";
 import NewsLetter from "../../assets/newletter.png";
 
 import { BiSearch } from "react-icons/bi";
@@ -9,15 +8,9 @@ import NewIphone from "../../components/HomeComponents/NewIphone";
 import { useSelector } from "react-redux";
 import ImageSlider from "../../components/HomeComponents/ImageSlider";
 import JustLoading from "../../components/JustLoading";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
   const { loading } = useSelector((state) => state.user);
-
-  const gotoLogin = () => {
-    navigate("/login");
-  };
 
   if (loading) {
     return (
@@ -30,43 +23,15 @@ const Home = () => {
   return (
     <div className="">
       {/* Landing Session */}
-      <div className="lg:h-screen bg-color lg:flex lg:items-center overflow-clip">
-        <div className="lg:w-1/2 flex-shrink-0 text-white pt-32 px-10 lg:pl-48 ">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Discover Most Affordable Apple Products
-          </h1>
-          <p className="font-semibold text-gray-500 text-sm lg:text-lg mb-10 lg:mb-3">
-            Find the best, reliable and affordable apple products here. We focus
-            on the product quality. Here you can find all the products apple
-            ever made. Even the products apple officially stopped selling. So
-            why you are waiting? Just order now!
-          </p>
-          <div className="flex justify-between rounded-2xl py-2 pl-2 lg:pl-5 pr-2 bg-white font-semibold">
-            <div className="flex items-center lg:gap-3">
-              <BiSearch className="text-2xl text-blue-600" />
-              <input
-                type="text"
-                placeholder="Find the best product"
-                className="text-black outline-none w-full"
-              />
-            </div>
-            <button className="btn-blue" onClick={gotoLogin}>
-              Search
-            </button>
-          </div>
-        </div>
-        {/* BG iPhone Image */}
-        <img
-          src={BgImage}
-          className="lg:w-[1200px] lg:-ml-32 lg:mt-16"
-          alt="Bg Image"
-        />
-      </div>
+      {/* Home Image Section */}
+        {/* Carousel Section */}
+        <ImageSlider />
+
       {/* ---------- New Collections  ---------*/}
       <NewCollection />
 
       {/* Four Iphones */}
-      <div className="bg-black text-white text-center">
+      <div className="bg-black text-white text-center" id="new-collection">
         <h1 className="text-5xl font-bold pt-32">ex.iphones.</h1>
         <p className="text-sm lg:text-xl mt-8 font-bold">
           From ₹25,000 to ₹100,000 Every Model Ever Built
@@ -83,8 +48,6 @@ const Home = () => {
       <NewIphone />
 
       {/* Image Slideshow */}
-
-      <ImageSlider />
 
       {/* Apple Watch Listing */}
       {/* <AppleWatchCollection /> */}

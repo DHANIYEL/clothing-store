@@ -1,11 +1,10 @@
 import React from "react";
-import Logo from "../assets/logoGrey.png";
+import SageLogo from "../assets/sage-logo.png"
 
 const ExIphoneLogo = () => {
   return (
     <>
-      <img src={Logo} alt="ex.iphones. logo" />
-      <p>ex.iphones.</p>
+      <img src={SageLogo} alt="logo" className="w-24" />
     </>
   );
 };

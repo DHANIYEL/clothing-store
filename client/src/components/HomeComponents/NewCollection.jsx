@@ -22,7 +22,7 @@ const NewCollection = () => {
 
   return (
     <>
-      <h1 className="text-center text-2xl lg:text-5xl text-gray-500 lg:text-gray-400 mt-10 font-extrabold">
+      <h1 className="text-center text-2xl lg:text-5xl text-gray-500 lg:text-gray-400 mt-10 font-extrabold"  >
         Newest Collection Available
       </h1>
       <div className="grid grid-cols-2 mx-auto lg:flex gap-5 p-10 justify-center">
