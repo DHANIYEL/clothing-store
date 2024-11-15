@@ -41,7 +41,7 @@ const Home = () => {
   />
 
   {/* Centered Text Overlay */}
-  <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 ">
+  <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-gray-200 bg-black bg-opacity-50 ">
     <div className="max-w-4xl">
     <h1 className="text-4xl lg:text-6xl font-bold mb-6">
       Discover Most Affordable Apple Products

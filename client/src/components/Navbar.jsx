@@ -10,8 +10,8 @@ const NavBar = ({ user, toggleDropDown, dropDown, handleLogout, toggleSideNavbar
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className={`flex z-10 absolute items-center justify-between py-5 px-5 lg:px-40 font-bold ${isHomePage ? 'text-white' : 'text-gray-500'} w-full`}>
-      <div className="w-7 flex items-center cursor-pointer opacity-70 hover:opacity-100">
+    <nav className={`flex z-10 absolute items-center justify-between py-5 px-5 lg:px-40 font-bold bg-white text-gray-500 w-full`}>
+      <div className=" flex items-center cursor-pointer opacity-70 hover:opacity-100">
         <ExIphoneLogo />
       </div>
       <div className="hidden lg:flex gap-10">
